@@ -81,6 +81,30 @@ implementation.
     `localStorage`-only model and items to revisit if a backend is
     introduced.
 
+## Post-implementation audit (2026-06-12)
+
+A post-implementation audit of the BMI module was carried out against
+commit `231aec8` on `claude/sg-nutrimz-phase-1a-tqmxz1`. Full results are in
+`TASK_B_POST_IMPLEMENTATION_AUDIT.md`. The audit confirmed all 30 checklist
+items pass and found no defects requiring a code change. It did not
+identify any new clinical-safety concerns beyond items 1–8 above. Two
+minor, non-blocking implementation notes were recorded for future
+consideration (not requiring human clinical sign-off, but worth addressing
+in a future pass):
+
+15. **Saved waist circumference is not redisplayed.** `/imc/resultado` does
+    not currently show the optional `waistCircumferenceCm` value back to the
+    user, even though it is stored locally if provided. Relevant if/when
+    item 3 (waist-circumference interpretation) is revisited.
+16. **Unused `deletedNote` string.** `strings.bmi.result.deletedNote` is
+    defined but not rendered by either delete flow (`BmiCalculator`/
+    `BmiResultCard` or `/imc/resultado`). Consider either using it for a
+    transient "deleted" confirmation or removing it in a future pass.
+
+Additionally, an accessibility enhancement opportunity (not a defect) was
+noted for item 13: BMI form validation error messages (`role="alert"`) are
+not yet linked to their inputs via `aria-describedby`/`aria-invalid`.
+
 ## Confirmation of constraints honored in this implementation
 
 - The BMI calculator is free, unlimited, and does not consume the

@@ -103,3 +103,23 @@ All notable changes to SG NutriMZ are documented in this file.
 - No diagnosis, prescriptions, medication guidance, or automatic
   waist-circumference cut-offs are implemented. See
   `CLINICAL_SAFETY.md` and `REQUIRES_HUMAN_VALIDATION.md`.
+
+## Phase 1A — BMI module post-implementation audit
+
+### Audited
+
+- Re-ran `npm run lint`, `npm run test` (99/99), and `npm run build` (21
+  routes) against commit `231aec8` — all pass with no changes required.
+- Verified the BMI module against a 30-item checklist (calculation
+  accuracy, exclusions, referral wording, privacy/local-storage behaviour,
+  accessibility, and clinical-safety framing) and 11 manual smoke-test
+  scenarios covering every classification band, the under-18 and pregnancy
+  exclusions, and invalid-input handling. No defects found; no code changes
+  made. See `TASK_B_POST_IMPLEMENTATION_AUDIT.md` for the full report.
+
+### Notes
+
+- Recorded two minor, non-blocking observations for future consideration:
+  the optional saved waist circumference is not redisplayed on
+  `/imc/resultado`, and `strings.bmi.result.deletedNote` is defined but
+  currently unused by either delete flow.
